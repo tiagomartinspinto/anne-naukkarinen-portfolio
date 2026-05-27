@@ -42,6 +42,15 @@ The Cargo stylesheet uses generic `sans-serif`; no proprietary font files were p
 - Expected public URL: `https://tiagomartinspinto.github.io/anne-naukkarinen-portfolio/`.
 - Paths are relative and intended to work from `/anne-naukkarinen-portfolio/`.
 
+## Final QA
+
+- `npm run check` passed on May 27, 2026: 21 projects, 21 published, 0 draft.
+- Local public preview opened successfully at `http://127.0.0.1:8080/`.
+- All 21 project routes opened in the browser preview with the expected active project and no browser console errors.
+- Desktop and mobile layouts were visually checked; the mobile project controls were adjusted so they no longer compress.
+- Local admin opened successfully at `http://127.0.0.1:8787/`, loaded project data, and showed the `LOCAL EDITOR ONLY` banner.
+- Forced public/read-only mode disables save, check, and publish buttons.
+
 ## Next Recommended Checks
 
 - Review the migrated site with Anne for text/credit accuracy.
