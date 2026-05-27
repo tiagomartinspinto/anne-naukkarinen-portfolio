@@ -39,7 +39,7 @@ The Cargo stylesheet uses generic `sans-serif`; no proprietary font files were p
 ## GitHub Pages Status
 
 - `_config.yml` excludes `tools/`, `node_modules/`, and `package-lock.json`.
-- `.github/workflows/pages.yml` deploys the public static subset from `main` and does not upload `tools/admin/`.
+- GitHub Pages is enabled from the `main` branch at `/`.
 - Expected public URL: `https://tiagomartinspinto.github.io/anne-naukkarinen-portfolio/`.
 - Paths are relative and intended to work from `/anne-naukkarinen-portfolio/`.
 
@@ -55,5 +55,5 @@ The Cargo stylesheet uses generic `sans-serif`; no proprietary font files were p
 ## Next Recommended Checks
 
 - Review the migrated site with Anne for text/credit accuracy.
-- Confirm the first GitHub Pages workflow run completes successfully.
+- Confirm the first GitHub Pages branch build completes successfully.
 - Run `npm run check`, local preview, and local admin before publishing future edits.

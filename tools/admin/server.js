@@ -26,7 +26,6 @@ const publishPaths = [
   "styles.css",
   "script.js",
   "_config.yml",
-  ".github/workflows/pages.yml",
   "package.json",
   "data/projects.js",
   "data/site.js",
