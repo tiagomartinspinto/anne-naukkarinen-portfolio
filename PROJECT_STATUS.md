@@ -41,6 +41,8 @@ The Cargo stylesheet uses generic `sans-serif`; no proprietary font files were p
 - `_config.yml` excludes `tools/`, `node_modules/`, and `package-lock.json`.
 - GitHub Pages is enabled from the `main` branch at `/`.
 - Expected public URL: `https://tiagomartinspinto.github.io/anne-naukkarinen-portfolio/`.
+- The public URL returned HTTP 200 after deployment on May 27, 2026.
+- `https://tiagomartinspinto.github.io/anne-naukkarinen-portfolio/tools/admin/` returned HTTP 404, confirming the local editor is not published.
 - Paths are relative and intended to work from `/anne-naukkarinen-portfolio/`.
 
 ## Final QA
@@ -51,9 +53,9 @@ The Cargo stylesheet uses generic `sans-serif`; no proprietary font files were p
 - Desktop and mobile layouts were visually checked; the mobile project controls were adjusted so they no longer compress.
 - Local admin opened successfully at `http://127.0.0.1:8787/`, loaded project data, and showed the `LOCAL EDITOR ONLY` banner.
 - Forced public/read-only mode disables save, check, and publish buttons.
+- GitHub Pages branch deployment was enabled and verified live.
 
 ## Next Recommended Checks
 
 - Review the migrated site with Anne for text/credit accuracy.
-- Confirm the first GitHub Pages branch build completes successfully.
 - Run `npm run check`, local preview, and local admin before publishing future edits.
