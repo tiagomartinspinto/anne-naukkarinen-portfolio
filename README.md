@@ -88,9 +88,10 @@ The publish flow stages:
 - `PROJECT_STATUS.md`
 - `MIGRATION_INVENTORY.md`
 - `_config.yml`
+- `.github/workflows/pages.yml`
 - `package.json`
 
-GitHub Pages should be configured to deploy from the `main` branch. The site is built to work under:
+GitHub Pages deploys from the `main` branch through `.github/workflows/pages.yml`. The workflow uploads only the public static files (`index.html`, `styles.css`, `script.js`, `data/`, and `assets/`), so `tools/admin/` is not published. The site is built to work under:
 
 ```text
 /anne-naukkarinen-portfolio/
