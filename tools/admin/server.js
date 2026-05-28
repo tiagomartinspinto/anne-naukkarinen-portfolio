@@ -63,8 +63,8 @@ const send = (response, statusCode, body, headers = {}) => {
   response.end(body);
 };
 
-const sendJson = (response, statusCode, payload) =>
-  send(response, statusCode, JSON.stringify(payload, null, 2), {
+const sendJson = (response, statusCode, responseData) =>
+  send(response, statusCode, JSON.stringify(responseData, null, 2), {
     "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store"
   });
@@ -160,13 +160,13 @@ const requireEmptyPortfolioConfirmation = (projects, confirmation, phrase) =>
   projects.length > 0 || confirmation === phrase;
 
 const handleProjects = async (response) => {
-  const payload = await readProjects();
+  const responseData = await readProjects();
   const site = await readSite();
   const gitStatus = await getScopedGitStatus();
 
   sendJson(response, 200, {
-    filters: payload.filters,
-    projects: payload.projects,
+    filters: responseData.filters,
+    projects: responseData.projects,
     site,
     gitStatus,
     previewUrl: "http://127.0.0.1:8080/",

@@ -11,8 +11,6 @@ const DISPLAY_FILTERS = ["all", ...APPROVED_CATEGORIES];
 
 const PROJECT_KEYS = new Set([
   "slug",
-  "cargoSlug",
-  "originalCargoUrl",
   "draft",
   "title",
   "year",
@@ -186,8 +184,6 @@ const validateProjects = (projects) => {
       }
 
       const slug = trimString(project.slug);
-      const cargoSlug = trimString(project.cargoSlug);
-      const originalCargoUrl = trimString(project.originalCargoUrl);
       const draft = project.draft === true;
       const title = trimString(project.title);
       const year = trimString(project.year);
@@ -311,8 +307,6 @@ const validateProjects = (projects) => {
 
       const sanitized = {
         slug,
-        ...(cargoSlug ? { cargoSlug } : {}),
-        ...(originalCargoUrl ? { originalCargoUrl } : {}),
         ...(draft ? { draft: true } : {}),
         title,
         year,

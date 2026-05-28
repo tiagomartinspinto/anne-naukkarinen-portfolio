@@ -80,6 +80,25 @@ These links are preserved from Cargo, but currently fail or need a replacement c
 - `https://www.nidekauppa.fi/` currently has a certificate/domain mismatch on the `www` host.
 - `http://khaospublishing.com/product/kyse-on-kaikesta/` returns 404.
 
+## Cargo Independence Check
+
+Date of check: May 28, 2026.
+
+- Cargo runtime dependencies remaining: none found.
+- Runtime files checked: `index.html`, `styles.css`, `script.js`, `data/site.js`, `data/projects.js`, and `tools/admin/`.
+- Cargo source URLs were removed from live project data and editor fields. Remaining Cargo URLs are historical migration/source references only in `README.md`, `MIGRATION_INVENTORY.md`, and this status file.
+- Local assets under `assets/projects/`: 167 files.
+- Migrated project records: 21 projects, 21 published, 0 draft.
+- `npm install`: passed with 0 vulnerabilities.
+- `npm run check`: passed with 21 projects, 21 published, 0 draft.
+- Local public preview: passed at `http://127.0.0.1:8080/`; homepage, all 21 project routes, active navigation, previous/next/index controls, canonical metadata, social image metadata, and console errors were checked.
+- Local editor/backend: passed at `http://127.0.0.1:8787/`; project list, site data, Save + Preview, local asset dimension lookup, missing asset detection, validation API, Publish / Safety presence, and forced public/read-only safety mode were checked.
+- GitHub Pages: public URL returned HTTP 200, and `tools/admin/` returned HTTP 404. `_config.yml` excludes `tools/`, `node_modules/`, `package-lock.json`, and backup data files.
+- Public save/publish API exposure: not present in preview/public routes; `POST /api/save` on the public preview returns 404.
+- Cargo deletion readiness: the GitHub Pages portfolio should continue to work after the Cargo account is deleted because no public runtime asset, page, script, CSS, thumbnail, image, social preview image, or editor validation path depends on Cargo.
+
+Anne should manually review the broken original external links listed above and give final approval for credits, collaborators, and the responsive mobile adaptation before deleting Cargo.
+
 ## Next Recommended Checks
 
 - Review the migrated site with Anne for final text/credit accuracy and replacement URLs for the broken original external links above.

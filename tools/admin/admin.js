@@ -79,8 +79,6 @@ const elements = {
   locationVenue: document.querySelector("#locationVenue"),
   collaborators: document.querySelector("#collaborators"),
   credits: document.querySelector("#credits"),
-  cargoSlug: document.querySelector("#cargoSlug"),
-  originalCargoUrl: document.querySelector("#originalCargoUrl"),
   thumbnail: document.querySelector("#thumbnail"),
   thumbnailPosition: document.querySelector("#thumbnailPosition"),
   thumbnailZoom: document.querySelector("#thumbnailZoom"),
@@ -158,8 +156,6 @@ const createBlankProject = () => ({
   locationVenue: "",
   collaborators: "",
   credits: "",
-  cargoSlug: "",
-  originalCargoUrl: "",
   thumbnail: "",
   categories: [],
   tags: [],
@@ -249,10 +245,10 @@ const setGitOutput = (value) => {
 };
 
 const errorSummary = (error, fallback = "Action failed.") =>
-  error?.payload?.message || error?.message || fallback;
+  error?.responseData?.message || error?.message || fallback;
 
 const errorDetails = (error) =>
-  error?.payload?.output || error?.payload?.errors?.join("\n") || error?.payload?.message || error?.message || "";
+  error?.responseData?.output || error?.responseData?.errors?.join("\n") || error?.responseData?.message || error?.message || "";
 
 const reportActionError = (actionLabel, error) => {
   setStatus(`${actionLabel} failed: ${errorSummary(error)}`);
@@ -343,15 +339,15 @@ const apiRequest = async (path, options = {}) => {
     }
   });
 
-  const payload = await parseJsonResponse(response);
+  const responseData = await parseJsonResponse(response);
   if (!response.ok) {
-    const message = payload?.message || payload?.error || `Request failed: ${response.status}`;
+    const message = responseData?.message || responseData?.error || `Request failed: ${response.status}`;
     const error = new Error(message);
-    error.payload = payload;
+    error.responseData = responseData;
     throw error;
   }
 
-  return payload;
+  return responseData;
 };
 
 const copyText = async (value, message) => {
@@ -477,8 +473,6 @@ const projectForForm = (project = createBlankProject()) => ({
   locationVenue: project.locationVenue || "",
   collaborators: project.collaborators || "",
   credits: project.credits || "",
-  cargoSlug: project.cargoSlug || "",
-  originalCargoUrl: project.originalCargoUrl || "",
   thumbnail: project.thumbnail || "",
   categories: Array.isArray(project.categories) ? [...project.categories] : [],
   tags: Array.isArray(project.tags) ? [...project.tags] : [],
@@ -631,8 +625,8 @@ const populateSiteForm = (site) => {
     ...safe.footer.roleLinks.map((link) => createSiteLinkRow(elements.siteRoleLinkList, link))
   );
   state.site = safe;
-  state.sourceSite = deepClone(safe);
-  state.savedSiteSnapshot = JSON.stringify(safe);
+  state.sourceSite = deepClone(buildSiteFromForm());
+  state.savedSiteSnapshot = JSON.stringify(buildSiteFromForm());
 };
 
 const getImageRowValues = (row) => ({
@@ -750,7 +744,7 @@ const detectDimensionsForRow = async (row) => {
   }
 
   try {
-    const payload = await apiRequest("/api/image-dimensions", {
+    const responseData = await apiRequest("/api/image-dimensions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -758,9 +752,9 @@ const detectDimensionsForRow = async (row) => {
       body: JSON.stringify({ src })
     });
 
-    row.querySelector("[data-field='width']").value = payload.width;
-    row.querySelector("[data-field='height']").value = payload.height;
-    setStatus(`Detected dimensions for ${src}: ${payload.width} x ${payload.height}.`);
+    row.querySelector("[data-field='width']").value = responseData.width;
+    row.querySelector("[data-field='height']").value = responseData.height;
+    setStatus(`Detected dimensions for ${src}: ${responseData.width} x ${responseData.height}.`);
     refreshPreview();
   } catch (error) {
     setStatus(error.message);
@@ -906,8 +900,6 @@ const buildProjectFromForm = () => {
 
   const project = {
     slug: elements.slug.value.trim(),
-    ...(elements.cargoSlug.value.trim() ? { cargoSlug: elements.cargoSlug.value.trim() } : {}),
-    ...(elements.originalCargoUrl.value.trim() ? { originalCargoUrl: elements.originalCargoUrl.value.trim() } : {}),
     ...(elements.draft.checked ? { draft: true } : {}),
     title: elements.title.value.trim(),
     year: elements.year.value.trim(),
@@ -1460,8 +1452,6 @@ const populateForm = (project, index = null) => {
   elements.locationVenue.value = safe.locationVenue;
   elements.collaborators.value = safe.collaborators;
   elements.credits.value = safe.credits;
-  elements.cargoSlug.value = safe.cargoSlug;
-  elements.originalCargoUrl.value = safe.originalCargoUrl;
   elements.thumbnail.value = safe.thumbnail;
   elements.thumbnailPosition.value = safe.thumbnailPosition;
   elements.thumbnailZoom.value = safe.thumbnailZoom;
@@ -1784,9 +1774,9 @@ const requestEmptyPortfolioConfirmation = (phrase, actionLabel) => {
 };
 
 const loadImageLibrary = async () => {
-  const payload = await apiRequest("/api/images");
-  state.imageLibrary.folders = payload.folders || [];
-  state.imageLibrary.flatFiles = payload.flatFiles || [];
+  const responseData = await apiRequest("/api/images");
+  state.imageLibrary.folders = responseData.folders || [];
+  state.imageLibrary.flatFiles = responseData.flatFiles || [];
   state.imageLibrary.fileMap = new Map(state.imageLibrary.flatFiles.map((file) => [file.src, file]));
 
   syncLibraryFolderWithSlug();
@@ -1894,14 +1884,14 @@ const renderImageLibrary = () => {
 };
 
 const loadProjects = async () => {
-  const payload = state.runtime.canUseLocalApi ? await apiRequest("/api/projects") : await loadStaticProjects();
-  state.filters = payload.filters.filter((category) => category !== "all");
-  state.projects = deepClone(payload.projects);
-  state.sourceProjects = deepClone(payload.projects);
+  const responseData = state.runtime.canUseLocalApi ? await apiRequest("/api/projects") : await loadStaticProjects();
+  state.filters = responseData.filters.filter((category) => category !== "all");
+  state.projects = deepClone(responseData.projects);
+  state.sourceProjects = deepClone(responseData.projects);
   state.savedProjectsSnapshot = JSON.stringify(state.projects);
-  populateSiteForm(payload.site || createBlankSite());
-  state.backupExists = Boolean(payload.backupExists);
-  state.previewUrl = state.runtime.canUseLocalApi ? payload.previewUrl || state.previewUrl : staticSitePreviewUrl();
+  populateSiteForm(responseData.site || createBlankSite());
+  state.backupExists = Boolean(responseData.backupExists);
+  state.previewUrl = state.runtime.canUseLocalApi ? responseData.previewUrl || state.previewUrl : staticSitePreviewUrl();
 
   elements.previewLink.href = state.previewUrl;
   renderCategoryOptions();
@@ -1913,7 +1903,7 @@ const loadProjects = async () => {
   renderProjectList();
   setGitOutput(
     state.runtime.canUseLocalApi
-      ? payload.gitStatus?.join("\n") || "Working tree clean for approved portfolio files."
+      ? responseData.gitStatus?.join("\n") || "Working tree clean for approved portfolio files."
       : `${publicDisabledMessage()}\n\nEditing, previews, and JSON export are available. Save, publish, backup restore, image scanning, and dimension detection are blocked.`
   );
   updateBackupButtons();
@@ -1984,7 +1974,7 @@ const saveLocally = async ({ skipConfirm = false, emptyConfirmationOverride = nu
   try {
     elements.saveButton.disabled = true;
     elements.savePreviewButton.disabled = true;
-    const payload = await apiRequest("/api/save", {
+    const responseData = await apiRequest("/api/save", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -1998,10 +1988,10 @@ const saveLocally = async ({ skipConfirm = false, emptyConfirmationOverride = nu
 
     state.savedProjectsSnapshot = JSON.stringify(state.projects);
     state.savedSiteSnapshot = JSON.stringify(buildSiteFromForm());
-    state.backupExists = Boolean(payload.backupExists);
+    state.backupExists = Boolean(responseData.backupExists);
     updateBackupButtons();
-    setStatus(payload.message);
-    setGitOutput(payload.gitStatus?.join("\n") || "Saved locally.");
+    setStatus(responseData.message);
+    setGitOutput(responseData.gitStatus?.join("\n") || "Saved locally.");
     updateMode();
     return true;
   } catch (error) {
@@ -2054,9 +2044,9 @@ const runPortfolioCheck = async () => {
     elements.runCheckButton.disabled = true;
     setStatus("Running npm run check...");
     setGitOutput("Running npm run check...");
-    const payload = await apiRequest("/api/check", { method: "POST" });
-    setStatus(payload.message || "Portfolio check passed.");
-    setGitOutput(payload.output);
+    const responseData = await apiRequest("/api/check", { method: "POST" });
+    setStatus(responseData.message || "Portfolio check passed.");
+    setGitOutput(responseData.output);
   } catch (error) {
     reportActionError("Run check", error);
   } finally {
@@ -2084,7 +2074,7 @@ const restoreBackup = async (mode) => {
   }
 
   try {
-    const payload = await apiRequest("/api/restore-backup", {
+    const responseData = await apiRequest("/api/restore-backup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -2093,8 +2083,8 @@ const restoreBackup = async (mode) => {
     });
 
     await loadProjects();
-    setStatus(payload.message);
-    setGitOutput(payload.gitStatus?.join("\n") || "Backup restored.");
+    setStatus(responseData.message);
+    setGitOutput(responseData.gitStatus?.join("\n") || "Backup restored.");
   } catch (error) {
     reportActionError(mode === "undo" ? "Undo save" : "Restore backup", error);
   }
@@ -2152,7 +2142,7 @@ const publishChanges = async () => {
 
   try {
     elements.publishButton.disabled = true;
-    const payload = await apiRequest("/api/publish", {
+    const responseData = await apiRequest("/api/publish", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -2166,8 +2156,8 @@ const publishChanges = async () => {
     state.savedProjectsSnapshot = JSON.stringify(state.projects);
     state.sourceSite = deepClone(buildSiteFromForm());
     state.savedSiteSnapshot = JSON.stringify(buildSiteFromForm());
-    setStatus(payload.message);
-    setGitOutput(payload.output);
+    setStatus(responseData.message);
+    setGitOutput(responseData.output);
     updateMode();
   } catch (error) {
     reportActionError("Publish", error);

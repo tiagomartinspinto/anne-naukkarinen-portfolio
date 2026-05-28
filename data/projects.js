@@ -11,8 +11,6 @@ export const PROJECT_DISPLAY_FILTERS = [
 export const PROJECTS = [
   {
     "slug": "jousikvartetto",
-    "cargoSlug": "Jousikvartetto",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/Jousikvartetto",
     "title": "Jousikvartetto",
     "year": "2025",
     "date": "2 August 2025",
@@ -85,8 +83,6 @@ export const PROJECTS = [
   },
   {
     "slug": "notes-on-wind",
-    "cargoSlug": "Notes-on-Wind",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/Notes-on-Wind",
     "title": "Notes on Wind",
     "year": "2025",
     "date": "May-June 2025",
@@ -130,7 +126,7 @@ export const PROJECTS = [
         "alt": "Notes on Wind thumbnail image",
         "width": 400,
         "height": 268,
-        "caption": "Thumbnail migrated from Cargo."
+        "caption": "Local migrated thumbnail."
       }
     ],
     "thumbnail": "assets/projects/notes-on-wind/thumb.jpg",
@@ -138,8 +134,6 @@ export const PROJECTS = [
   },
   {
     "slug": "a-book-of-dances",
-    "cargoSlug": "A-Book-of-Dances",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/A-Book-of-Dances",
     "title": "A Book of Dances",
     "year": "2024",
     "date": "2024",
@@ -213,8 +207,6 @@ export const PROJECTS = [
   },
   {
     "slug": "carried-by-invisible-bodies",
-    "cargoSlug": "Carried-by-Invisible-Bodies",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/Carried-by-Invisible-Bodies",
     "title": "Carried by Invisible Bodies",
     "year": "2022",
     "date": "7-25 September 2022",
@@ -336,8 +328,6 @@ export const PROJECTS = [
   },
   {
     "slug": "notes-1-4-9-8-2020",
-    "cargoSlug": "Notes-1-4-9-8-2020",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/Notes-1-4-9-8-2020",
     "title": "Notes 1.4.-9.8.2020",
     "year": "2020",
     "date": "1 April-9 August 2020",
@@ -592,8 +582,6 @@ export const PROJECTS = [
   },
   {
     "slug": "how-to-alone",
-    "cargoSlug": "how-to-________-alone",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/how-to-________-alone",
     "title": "how to ________ alone",
     "year": "2018 & 2019",
     "date": "2018-2019",
@@ -738,8 +726,6 @@ export const PROJECTS = [
   },
   {
     "slug": "kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019",
-    "cargoSlug": "Kyse-on-kaikesta-Keskusteluja-ajalta-3-9-2017-31-5-2019",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/Kyse-on-kaikesta-Keskusteluja-ajalta-3-9-2017-31-5-2019",
     "title": "Kyse on kaikesta – Keskusteluja ajalta 3.9.2017-31.5.2019",
     "year": "2019",
     "date": "3 September 2017-31 May 2019",
@@ -747,7 +733,7 @@ export const PROJECTS = [
     "role": "Conversation, writing, performance",
     "locationVenue": "XS Festival / Mad House Helsinki",
     "collaborators": "Collaborators and contributors listed in original project text",
-    "credits": "Original Finnish text, book availability, and event links preserved from Cargo.",
+    "credits": "Original Finnish text, book availability, and event links preserved from the original portfolio.",
     "categories": [
       "publication",
       "performance"
@@ -921,8 +907,6 @@ export const PROJECTS = [
   },
   {
     "slug": "i-found-a-mouth-and-fell-into-it",
-    "cargoSlug": "I-found-a-mouth-and-fell-into-it",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/I-found-a-mouth-and-fell-into-it",
     "title": "I found a mouth and fell into it",
     "year": "2019",
     "date": "2019",
@@ -930,7 +914,7 @@ export const PROJECTS = [
     "role": "Concept and performance",
     "locationVenue": "",
     "collaborators": "",
-    "credits": "Original performance notes and credits preserved from Cargo.",
+    "credits": "Original performance notes and credits preserved from the original portfolio.",
     "categories": [
       "performance"
     ],
@@ -968,8 +952,6 @@ export const PROJECTS = [
   },
   {
     "slug": "mouthing",
-    "cargoSlug": "Mouthing-1",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/Mouthing-1",
     "title": "Mouthing",
     "year": "2018",
     "date": "2018",
@@ -1121,8 +1103,6 @@ export const PROJECTS = [
   },
   {
     "slug": "hear-her-ears-here",
-    "cargoSlug": "hear-her-ears-here",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/hear-her-ears-here",
     "title": "hear her ears here",
     "year": "2018",
     "date": "2018",
@@ -1195,8 +1175,6 @@ export const PROJECTS = [
   },
   {
     "slug": "ikkoohaik-im-ok",
-    "cargoSlug": "ikkoohaik-I-m-ok",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/ikkoohaik-I-m-ok",
     "title": "ikkööhäik - I'm ok",
     "year": "2018",
     "date": "2018",
@@ -1204,7 +1182,7 @@ export const PROJECTS = [
     "role": "Collaboration and performance",
     "locationVenue": "Denmark",
     "collaborators": "Maarit Mustonen, Kirke Meng / Forlaget Gestus",
-    "credits": "Collaboration with Maarit Mustonen. Artist book and review links preserved from Cargo.",
+    "credits": "Collaboration with Maarit Mustonen. Artist book and review links preserved from the original portfolio.",
     "categories": [
       "performance",
       "publication",
@@ -1334,8 +1312,6 @@ export const PROJECTS = [
   },
   {
     "slug": "water-fall-7",
-    "cargoSlug": "WATER-FALL-7",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/WATER-FALL-7",
     "title": "WATER FALL 7",
     "year": "2018",
     "date": "2018",
@@ -1403,8 +1379,6 @@ export const PROJECTS = [
   },
   {
     "slug": "water-fall-6",
-    "cargoSlug": "WATER-FALL-6",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/WATER-FALL-6",
     "title": "WATER FALL 6",
     "year": "2017",
     "date": "2017",
@@ -1456,8 +1430,6 @@ export const PROJECTS = [
   },
   {
     "slug": "water-fall-5",
-    "cargoSlug": "WATER-FALL-5",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/WATER-FALL-5",
     "title": "WATER FALL 5",
     "year": "2017",
     "date": "11-17 September 2017",
@@ -1525,8 +1497,6 @@ export const PROJECTS = [
   },
   {
     "slug": "water-fall-4",
-    "cargoSlug": "WATER-FALL-4",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/WATER-FALL-4",
     "title": "WATER FALL 4",
     "year": "2017",
     "date": "8-9 June 2017",
@@ -1612,8 +1582,6 @@ export const PROJECTS = [
   },
   {
     "slug": "water-fall-3",
-    "cargoSlug": "WATER-FALL-3",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/WATER-FALL-3",
     "title": "WATER FALL 3",
     "year": "2017",
     "date": "2 June-2 July 2017",
@@ -1756,8 +1724,6 @@ export const PROJECTS = [
   },
   {
     "slug": "water-fall-2",
-    "cargoSlug": "WATER-FALL-2",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/WATER-FALL-2",
     "title": "WATER FALL 2",
     "year": "2017",
     "date": "18 February 2017",
@@ -1892,8 +1858,6 @@ export const PROJECTS = [
   },
   {
     "slug": "water-fall-1",
-    "cargoSlug": "WATER-FALL-1",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/WATER-FALL-1",
     "title": "WATER FALL 1",
     "year": "2016",
     "date": "29 October 2016",
@@ -1977,8 +1941,6 @@ export const PROJECTS = [
   },
   {
     "slug": "oma-jees-toisen-jees",
-    "cargoSlug": "Oma-Jees-toisen-jees",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/Oma-Jees-toisen-jees",
     "title": "Oma Jees, toisen jees",
     "year": "2015",
     "date": "August 2015",
@@ -2093,8 +2055,6 @@ export const PROJECTS = [
   },
   {
     "slug": "translators-note",
-    "cargoSlug": "Translator-s-Note",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/Translator-s-Note",
     "title": "Translator's Note",
     "year": "2015",
     "date": "2015",
@@ -2165,8 +2125,6 @@ export const PROJECTS = [
   },
   {
     "slug": "about",
-    "cargoSlug": "About",
-    "originalCargoUrl": "https://cargocollective.com/annenaukkarinen/About",
     "title": "About",
     "year": "Info",
     "date": "",
@@ -2199,7 +2157,7 @@ export const PROJECTS = [
         "alt": "About thumbnail image",
         "width": 400,
         "height": 268,
-        "caption": "Thumbnail migrated from Cargo."
+        "caption": "Local migrated thumbnail."
       }
     ],
     "thumbnail": "assets/projects/about/thumb.jpeg",

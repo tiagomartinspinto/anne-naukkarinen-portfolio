@@ -1,7 +1,9 @@
 # Migration Inventory
 
-Source: https://cargocollective.com/annenaukkarinen
+Historical migration source only: https://cargocollective.com/annenaukkarinen
 Target: https://tiagomartinspinto.github.io/anne-naukkarinen-portfolio/
+
+Cargo URLs in this file are archival source references from the migration. They are not used by the public GitHub Pages site, the runtime data, or the local editor.
 
 ## Top-Level Pages And Order
 
@@ -81,8 +83,8 @@ Target: https://tiagomartinspinto.github.io/anne-naukkarinen-portfolio/
 
 - Order: 1
 - Slug: jousikvartetto
-- Cargo slug: Jousikvartetto
-- Source: https://cargocollective.com/annenaukkarinen/Jousikvartetto
+- Historical Cargo slug (archival only): Jousikvartetto
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/Jousikvartetto
 - Year/date: 2025 / 2 August 2025
 - Type: Interdisciplinary work / performance
 - Role: Script and concept
@@ -193,8 +195,8 @@ String Quartet is part of the multidisciplinary Vesireitit (Waterways) project, 
 
 - Order: 2
 - Slug: notes-on-wind
-- Cargo slug: Notes-on-Wind
-- Source: https://cargocollective.com/annenaukkarinen/Notes-on-Wind
+- Historical Cargo slug (archival only): Notes-on-Wind
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/Notes-on-Wind
 - Year/date: 2025 / May-June 2025
 - Type: Poster / correspondence project
 - Role: Correspondence and concept
@@ -232,8 +234,8 @@ Read Notes on Wind in full on the Institut finlandais website.
 
 - Order: 3
 - Slug: a-book-of-dances
-- Cargo slug: A-Book-of-Dances
-- Source: https://cargocollective.com/annenaukkarinen/A-Book-of-Dances
+- Historical Cargo slug (archival only): A-Book-of-Dances
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/A-Book-of-Dances
 - Year/date: 2024 / 2024
 - Type: Book
 - Role: Concept and editor
@@ -307,8 +309,8 @@ Theatre’s New Base Library Interview
 
 - Order: 4
 - Slug: carried-by-invisible-bodies
-- Cargo slug: Carried-by-Invisible-Bodies
-- Source: https://cargocollective.com/annenaukkarinen/Carried-by-Invisible-Bodies
+- Historical Cargo slug (archival only): Carried-by-Invisible-Bodies
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/Carried-by-Invisible-Bodies
 - Year/date: 2022 / 7-25 September 2022
 - Type: Performance & installation
 - Role: Choreography and concept
@@ -405,8 +407,8 @@ Images: Jesper Dolgov
 
 - Order: 5
 - Slug: notes-1-4-9-8-2020
-- Cargo slug: Notes-1-4-9-8-2020
-- Source: https://cargocollective.com/annenaukkarinen/Notes-1-4-9-8-2020
+- Historical Cargo slug (archival only): Notes-1-4-9-8-2020
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/Notes-1-4-9-8-2020
 - Year/date: 2020 / 1 April-9 August 2020
 - Type: Performance & publication
 - Role: Choreography, concept and performance
@@ -513,8 +515,8 @@ nukuin pitkään
 
 - Order: 6
 - Slug: how-to-alone
-- Cargo slug: how-to-________-alone
-- Source: https://cargocollective.com/annenaukkarinen/how-to-________-alone
+- Historical Cargo slug (archival only): how-to-________-alone
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/how-to-________-alone
 - Year/date: 2018 & 2019 / 2018-2019
 - Type: Performance / installation
 - Role: Concept and performance
@@ -585,8 +587,8 @@ _____
 
 - Order: 7
 - Slug: kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019
-- Cargo slug: Kyse-on-kaikesta-Keskusteluja-ajalta-3-9-2017-31-5-2019
-- Source: https://cargocollective.com/annenaukkarinen/Kyse-on-kaikesta-Keskusteluja-ajalta-3-9-2017-31-5-2019
+- Historical Cargo slug (archival only): Kyse-on-kaikesta-Keskusteluja-ajalta-3-9-2017-31-5-2019
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/Kyse-on-kaikesta-Keskusteluja-ajalta-3-9-2017-31-5-2019
 - Year/date: 2019 / 3 September 2017-31 May 2019
 - Type: Book / performance event
 - Role: Conversation, writing, performance
@@ -638,8 +640,8 @@ Esitystapahtuma
 
 - Order: 8
 - Slug: i-found-a-mouth-and-fell-into-it
-- Cargo slug: I-found-a-mouth-and-fell-into-it
-- Source: https://cargocollective.com/annenaukkarinen/I-found-a-mouth-and-fell-into-it
+- Historical Cargo slug (archival only): I-found-a-mouth-and-fell-into-it
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/I-found-a-mouth-and-fell-into-it
 - Year/date: 2019 / 2019
 - Type: Performance
 - Role: Concept and performance
@@ -683,8 +685,8 @@ The work is supported by COMA, The Center of Multisensory Arts.
 
 - Order: 9
 - Slug: mouthing
-- Cargo slug: Mouthing-1
-- Source: https://cargocollective.com/annenaukkarinen/Mouthing-1
+- Historical Cargo slug (archival only): Mouthing-1
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/Mouthing-1
 - Year/date: 2018 / 2018
 - Type: Performance
 - Role: Collaborating performer / maker
@@ -760,8 +762,8 @@ Photos: Maarit Mustonen
 
 - Order: 10
 - Slug: hear-her-ears-here
-- Cargo slug: hear-her-ears-here
-- Source: https://cargocollective.com/annenaukkarinen/hear-her-ears-here
+- Historical Cargo slug (archival only): hear-her-ears-here
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/hear-her-ears-here
 - Year/date: 2018 / 2018
 - Type: Performance
 - Role: Collaboration and performance
@@ -812,8 +814,8 @@ Supported by Frame Contemporary Finland and Forlaget Gestus
 
 - Order: 11
 - Slug: ikkoohaik-im-ok
-- Cargo slug: ikkoohaik-I-m-ok
-- Source: https://cargocollective.com/annenaukkarinen/ikkoohaik-I-m-ok
+- Historical Cargo slug (archival only): ikkoohaik-I-m-ok
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/ikkoohaik-I-m-ok
 - Year/date: 2018 / 2018
 - Type: Performance & artist's book
 - Role: Collaboration and performance
@@ -913,8 +915,8 @@ The work was supported by Finnish Cultural Foundation / Uusimaa Regional Fund, A
 
 - Order: 12
 - Slug: water-fall-7
-- Cargo slug: WATER-FALL-7
-- Source: https://cargocollective.com/annenaukkarinen/WATER-FALL-7
+- Historical Cargo slug (archival only): WATER-FALL-7
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/WATER-FALL-7
 - Year/date: 2018 / 2018
 - Type: Performance
 - Role: Collaboration and performance
@@ -967,8 +969,8 @@ WATER FALL, a 7-part body of work, was based on our shared interest in memory, i
 
 - Order: 13
 - Slug: water-fall-6
-- Cargo slug: WATER-FALL-6
-- Source: https://cargocollective.com/annenaukkarinen/WATER-FALL-6
+- Historical Cargo slug (archival only): WATER-FALL-6
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/WATER-FALL-6
 - Year/date: 2017 / 2017
 - Type: Performance
 - Role: Collaboration and performance
@@ -1003,8 +1005,8 @@ WATER FALL, a series of performances and installations began in 2016. The series
 
 - Order: 14
 - Slug: water-fall-5
-- Cargo slug: WATER-FALL-5
-- Source: https://cargocollective.com/annenaukkarinen/WATER-FALL-5
+- Historical Cargo slug (archival only): WATER-FALL-5
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/WATER-FALL-5
 - Year/date: 2017 / 11-17 September 2017
 - Type: Performance
 - Role: Collaboration and performance
@@ -1043,8 +1045,8 @@ WATER FALL, a 7-part body of work, was based on our shared interest in memory, i
 
 - Order: 15
 - Slug: water-fall-4
-- Cargo slug: WATER-FALL-4
-- Source: https://cargocollective.com/annenaukkarinen/WATER-FALL-4
+- Historical Cargo slug (archival only): WATER-FALL-4
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/WATER-FALL-4
 - Year/date: 2017 / 8-9 June 2017
 - Type: Performance / installation
 - Role: Collaboration and performance
@@ -1086,8 +1088,8 @@ WATER FALL, a 7-part body of work, was based on our shared interest in memory, i
 
 - Order: 16
 - Slug: water-fall-3
-- Cargo slug: WATER-FALL-3
-- Source: https://cargocollective.com/annenaukkarinen/WATER-FALL-3
+- Historical Cargo slug (archival only): WATER-FALL-3
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/WATER-FALL-3
 - Year/date: 2017 / 2 June-2 July 2017
 - Type: Performance / sound piece
 - Role: Collaboration and performance
@@ -1144,8 +1146,8 @@ In group exhibition Kesärulla (Summer Roll) at SIC, Helsinki, 2017.
 
 - Order: 17
 - Slug: water-fall-2
-- Cargo slug: WATER-FALL-2
-- Source: https://cargocollective.com/annenaukkarinen/WATER-FALL-2
+- Historical Cargo slug (archival only): WATER-FALL-2
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/WATER-FALL-2
 - Year/date: 2017 / 18 February 2017
 - Type: Performance
 - Role: Collaboration and performance
@@ -1215,8 +1217,8 @@ katso teosta katsojien kanssa / watch the work with the audience
 
 - Order: 18
 - Slug: water-fall-1
-- Cargo slug: WATER-FALL-1
-- Source: https://cargocollective.com/annenaukkarinen/WATER-FALL-1
+- Historical Cargo slug (archival only): WATER-FALL-1
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/WATER-FALL-1
 - Year/date: 2016 / 29 October 2016
 - Type: Performance
 - Role: Collaboration and performance
@@ -1262,8 +1264,8 @@ Photos: Hertta Kiiski
 
 - Order: 19
 - Slug: oma-jees-toisen-jees
-- Cargo slug: Oma-Jees-toisen-jees
-- Source: https://cargocollective.com/annenaukkarinen/Oma-Jees-toisen-jees
+- Historical Cargo slug (archival only): Oma-Jees-toisen-jees
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/Oma-Jees-toisen-jees
 - Year/date: 2015 / August 2015
 - Type: Performance
 - Role: Collaboration and performance
@@ -1329,8 +1331,8 @@ Images: Aleksi & Tuomas Närvä
 
 - Order: 20
 - Slug: translators-note
-- Cargo slug: Translator-s-Note
-- Source: https://cargocollective.com/annenaukkarinen/Translator-s-Note
+- Historical Cargo slug (archival only): Translator-s-Note
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/Translator-s-Note
 - Year/date: 2015 / 2015
 - Type: Performance
 - Role: Dancer / choreographer
@@ -1383,8 +1385,8 @@ Documentation: Maarit Mustonen
 
 - Order: 21
 - Slug: about
-- Cargo slug: About
-- Source: https://cargocollective.com/annenaukkarinen/About
+- Historical Cargo slug (archival only): About
+- Historical Cargo source URL (archival only; not used at runtime): https://cargocollective.com/annenaukkarinen/About
 - Year/date: Info
 - Type: About / contact
 - Role: Portfolio biography
@@ -1417,3 +1419,31 @@ IG: annenaukkarinen
 - Several thumbnail crops on Cargo used separate `prt_*` thumbnail files. These were downloaded locally and used as `thumbnail` fields; content images remain in project media order.
 - No embedded video/audio players were found in the Cargo HTML. Vimeo and other external media appeared as normal text links and are preserved as links.
 - The original site used Cargo analytics/runtime scripts. These are intentionally not migrated.
+
+## Post-Cargo Runtime Inventory
+
+This section confirms the runtime state after Cargo source URLs were removed from live project data. Historical Cargo URLs remain only in this inventory as archival migration references; they are not used by the public site or local editor.
+
+| Project | Slug | Local asset folder | Local asset files | External non-Cargo links | Cargo source URL | Unresolved uncertainties |
+| --- | --- | --- | ---: | ---: | --- | --- |
+| Jousikvartetto | jousikvartetto | assets/projects/jousikvartetto/ | 2 | 2 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| Notes on Wind | notes-on-wind | assets/projects/notes-on-wind/ | 1 | 1 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| A Book of Dances | a-book-of-dances | assets/projects/a-book-of-dances/ | 2 | 6 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| Carried by Invisible Bodies | carried-by-invisible-bodies | assets/projects/carried-by-invisible-bodies/ | 9 | 1 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| Notes 1.4.-9.8.2020 | notes-1-4-9-8-2020 | assets/projects/notes-1-4-9-8-2020/ | 26 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| how to ________ alone | how-to-alone | assets/projects/how-to-alone/ | 12 | 3 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| Kyse on kaikesta – Keskusteluja ajalta 3.9.2017-31.5.2019 | kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019 | assets/projects/kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019/ | 16 | 6 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| I found a mouth and fell into it | i-found-a-mouth-and-fell-into-it | assets/projects/i-found-a-mouth-and-fell-into-it/ | 2 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| Mouthing | mouthing | assets/projects/mouthing/ | 14 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| hear her ears here | hear-her-ears-here | assets/projects/hear-her-ears-here/ | 5 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| ikkööhäik - I'm ok | ikkoohaik-im-ok | assets/projects/ikkoohaik-im-ok/ | 10 | 2 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| WATER FALL 7 | water-fall-7 | assets/projects/water-fall-7/ | 4 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| WATER FALL 6 | water-fall-6 | assets/projects/water-fall-6/ | 3 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| WATER FALL 5 | water-fall-5 | assets/projects/water-fall-5/ | 5 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| WATER FALL 4 | water-fall-4 | assets/projects/water-fall-4/ | 7 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| WATER FALL 3 | water-fall-3 | assets/projects/water-fall-3/ | 14 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| WATER FALL 2 | water-fall-2 | assets/projects/water-fall-2/ | 13 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| WATER FALL 1 | water-fall-1 | assets/projects/water-fall-1/ | 7 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| Oma Jees, toisen jees | oma-jees-toisen-jees | assets/projects/oma-jees-toisen-jees/ | 9 | 1 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| Translator's Note | translators-note | assets/projects/translators-note/ | 5 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| About | about | assets/projects/about/ | 1 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
