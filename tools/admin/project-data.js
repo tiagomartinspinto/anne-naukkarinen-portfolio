@@ -44,7 +44,9 @@ const VIDEO_PROVIDERS = new Set(["youtube", "vimeo", "file", "url"]);
 const AUDIO_PROVIDERS = new Set(["file", "soundcloud", "url"]);
 
 const isPlainObject = (value) => typeof value === "object" && value !== null && !Array.isArray(value);
+const stringValue = (value) => (typeof value === "string" ? value : "");
 const trimString = (value) => (typeof value === "string" ? value.trim() : "");
+const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
 
 const ensureArrayOfStrings = (value, fieldName, errors) => {
   if (!Array.isArray(value)) {
@@ -59,9 +61,9 @@ const ensureArrayOfStrings = (value, fieldName, errors) => {
         return "";
       }
 
-      return item.trim();
+      return item;
     })
-    .filter(Boolean);
+    .filter((item) => item !== "");
 };
 
 const validateMediaItem = (item, fieldName, errors) => {
@@ -79,7 +81,8 @@ const validateMediaItem = (item, fieldName, errors) => {
   const source = trimString(item.source || item.src);
   const provider = trimString(item.provider).toLowerCase();
   const alt = trimString(item.alt);
-  const caption = trimString(item.caption);
+  const caption = stringValue(item.caption);
+  const credit = stringValue(item.credit);
   const thumbnail = trimString(item.thumbnail);
   const width = item.width === undefined || item.width === "" ? null : Number(item.width);
   const height = item.height === undefined || item.height === "" ? null : Number(item.height);
@@ -103,15 +106,22 @@ const validateMediaItem = (item, fieldName, errors) => {
       errors.push(`${fieldName}.height must be a positive number for image media.`);
     }
 
-    return compactObjectForData({
+    const imageMedia = {
       type: "image",
       src: source,
       alt,
       width,
-      height,
-      caption,
-      credit: trimString(item.credit)
-    });
+      height
+    };
+
+    if (hasOwn(item, "caption")) {
+      imageMedia.caption = caption;
+    }
+    if (hasOwn(item, "credit") || trimString(credit)) {
+      imageMedia.credit = credit;
+    }
+
+    return imageMedia;
   }
 
   if (type === "video" && provider && !VIDEO_PROVIDERS.has(provider)) {
@@ -122,14 +132,21 @@ const validateMediaItem = (item, fieldName, errors) => {
     errors.push(`${fieldName}.provider must be file, soundcloud, or url.`);
   }
 
-  return compactObjectForData({
+  const mediaItem = compactObjectForData({
     type,
     provider: provider || (type === "video" ? "url" : "url"),
     source,
-    caption,
-    credit: trimString(item.credit),
     thumbnail
   });
+
+  if (hasOwn(item, "caption")) {
+    mediaItem.caption = caption;
+  }
+  if (hasOwn(item, "credit") || trimString(credit)) {
+    mediaItem.credit = credit;
+  }
+
+  return mediaItem;
 };
 
 const compactObjectForData = (object) =>
@@ -137,8 +154,7 @@ const compactObjectForData = (object) =>
     Object.entries(object).filter(([, value]) => value !== "" && value !== undefined && value !== null)
   );
 
-const toObjectLiteral = (value) =>
-  JSON.stringify(value, null, 2).replace(/"([A-Za-z_$][A-Za-z0-9_$]*)":/g, "$1:");
+const toObjectLiteral = (value) => JSON.stringify(value, null, 2);
 
 const parseProjectsModule = (source) => {
   const executable = source.replace(/export\s+const\s+/g, "const ");
@@ -175,13 +191,13 @@ const validateProjects = (projects) => {
       const draft = project.draft === true;
       const title = trimString(project.title);
       const year = trimString(project.year);
-      const date = trimString(project.date);
+      const date = stringValue(project.date);
       const projectType = trimString(project.projectType);
       const role = trimString(project.role);
-      const locationVenue = trimString(project.locationVenue);
-      const collaborators = trimString(project.collaborators);
-      const credits = trimString(project.credits);
-      const shortDescription = trimString(project.shortDescription);
+      const locationVenue = stringValue(project.locationVenue);
+      const collaborators = stringValue(project.collaborators);
+      const credits = stringValue(project.credits);
+      const shortDescription = stringValue(project.shortDescription);
       const contentHtml = typeof project.contentHtml === "string" ? project.contentHtml : "";
       const contentText = typeof project.contentText === "string" ? project.contentText : "";
       const thumbnail = trimString(project.thumbnail);
@@ -213,7 +229,7 @@ const validateProjects = (projects) => {
       if (!role) {
         errors.push(`projects[${index}].role is required.`);
       }
-      if (!shortDescription) {
+      if (!trimString(shortDescription)) {
         errors.push(`projects[${index}].shortDescription is required.`);
       }
       if (thumbnailZoom !== null && (!Number.isFinite(thumbnailZoom) || thumbnailZoom < 1 || thumbnailZoom > 3)) {
@@ -300,12 +316,12 @@ const validateProjects = (projects) => {
         ...(draft ? { draft: true } : {}),
         title,
         year,
-        ...(date ? { date } : {}),
+        ...(hasOwn(project, "date") || trimString(date) ? { date } : {}),
         projectType,
         role,
-        ...(locationVenue ? { locationVenue } : {}),
-        ...(collaborators ? { collaborators } : {}),
-        ...(credits ? { credits } : {}),
+        ...(hasOwn(project, "locationVenue") || trimString(locationVenue) ? { locationVenue } : {}),
+        ...(hasOwn(project, "collaborators") || trimString(collaborators) ? { collaborators } : {}),
+        ...(hasOwn(project, "credits") || trimString(credits) ? { credits } : {}),
         categories,
         tags,
         shortDescription,

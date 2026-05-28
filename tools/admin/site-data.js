@@ -17,15 +17,16 @@ const FOOTER_KEYS = new Set(["socialLinks", "aboutTitle", "aboutLines", "locatio
 const LINK_KEYS = new Set(["label", "url"]);
 
 const trimString = (value) => (typeof value === "string" ? value.trim() : "");
+const stringValue = (value) => (typeof value === "string" ? value : "");
 const isPlainObject = (value) => typeof value === "object" && value !== null && !Array.isArray(value);
+const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object, key);
 
 const compactObjectForData = (object) =>
   Object.fromEntries(
     Object.entries(object).filter(([, value]) => value !== "" && value !== undefined && value !== null)
   );
 
-const toObjectLiteral = (value) =>
-  JSON.stringify(value, null, 2).replace(/"([A-Za-z_$][A-Za-z0-9_$]*)":/g, "$1:");
+const toObjectLiteral = (value) => JSON.stringify(value, null, 2);
 
 const parseSiteModule = (source) => {
   const executable = source.replace(/export\s+const\s+/g, "const ");
@@ -117,7 +118,7 @@ const validateSite = (site) => {
   const socialImageAlt = trimString(site.socialImageAlt);
   const canonicalUrl = trimString(site.canonicalUrl);
   const name = trimString(header.name);
-  const mark = trimString(header.mark);
+  const mark = stringValue(header.mark);
   const contactLabel = trimString(header.contactLabel);
   const contactEmail = trimString(header.contactEmail);
   const aboutTitle = trimString(footer.aboutTitle);
@@ -161,13 +162,13 @@ const validateSite = (site) => {
   }
 
   const aboutLines = Array.isArray(footer.aboutLines)
-    ? footer.aboutLines.map(trimString).filter(Boolean)
+    ? footer.aboutLines.map(stringValue).filter((line) => line !== "")
     : [];
 
   if (!Array.isArray(footer.aboutLines)) {
     errors.push("SITE.footer.aboutLines must be an array.");
   }
-  if (!aboutLines.length) {
+  if (!aboutLines.some((line) => trimString(line))) {
     errors.push("SITE.footer.aboutLines must contain at least one line.");
   }
 
@@ -181,7 +182,7 @@ const validateSite = (site) => {
     canonicalUrl,
     header: {
       name,
-      ...(mark ? { mark } : {}),
+      ...(hasOwn(header, "mark") || trimString(mark) ? { mark } : {}),
       contactLabel,
       contactEmail
     },

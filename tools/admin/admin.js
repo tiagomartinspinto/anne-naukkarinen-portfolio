@@ -578,7 +578,9 @@ const siteForForm = (site = createBlankSite()) => ({
       Array.isArray(site.footer?.roleLinks) && site.footer.roleLinks.length
         ? site.footer.roleLinks.map((link) => ({ label: link.label || "", url: link.url || "" }))
         : [{ label: "", url: "" }]
-  }
+  },
+  aboutHtml: site.aboutHtml || "",
+  navigationLabel: site.navigationLabel || ""
 });
 
 const buildSiteFromForm = () => ({
@@ -598,10 +600,12 @@ const buildSiteFromForm = () => ({
   footer: {
     socialLinks: getLinksFromList(elements.siteSocialLinkList),
     aboutTitle: elements.siteAboutTitle.value.trim(),
-    aboutLines: elements.siteAboutLines.value.split("\n").map((line) => line.trim()).filter(Boolean),
+    aboutLines: elements.siteAboutLines.value.split("\n").filter((line) => line !== ""),
     location: elements.siteLocation.value.trim(),
     roleLinks: getLinksFromList(elements.siteRoleLinkList)
-  }
+  },
+  aboutHtml: state.site?.aboutHtml || "",
+  navigationLabel: state.site?.navigationLabel || ""
 });
 
 const populateSiteForm = (site) => {
@@ -869,8 +873,8 @@ const buildProjectFromForm = () => {
 
   const fullDescription = Array.from(
     elements.paragraphList.querySelectorAll("[data-field='paragraph']"),
-    (input) => input.value.trim()
-  ).filter(Boolean);
+    (input) => input.value
+  ).filter((value) => value !== "");
 
   const links = Array.from(elements.linkList.querySelectorAll(".repeatable-item"), (row) => {
     const label = row.querySelector("[data-field='label']").value.trim();
@@ -884,13 +888,17 @@ const buildProjectFromForm = () => {
       const provider = row.querySelector("[data-field='provider']").value;
       const src = row.querySelector("[data-field='src']").value.trim();
       const alt = row.querySelector("[data-field='alt']").value.trim();
-      const caption = row.querySelector("[data-field='caption']").value.trim();
+      const caption = row.querySelector("[data-field='caption']").value;
       const credit = row.querySelector("[data-field='credit']").value.trim();
       const thumbnail = row.querySelector("[data-field='thumbnail']").value.trim();
       const width = parseNumber(row.querySelector("[data-field='width']").value);
       const height = parseNumber(row.querySelector("[data-field='height']").value);
       if (type === "image") {
-        return compactObject({ type, src, alt, width, height, caption, credit });
+        const imageItem = compactObject({ type, src, alt, width, height, credit });
+        if (Object.keys(imageItem).length > 1 || caption) {
+          imageItem.caption = caption;
+        }
+        return imageItem;
       }
       return compactObject({ type, provider, source: src, caption, credit, thumbnail });
     })
@@ -911,7 +919,7 @@ const buildProjectFromForm = () => {
     ...(elements.credits.value.trim() ? { credits: elements.credits.value.trim() } : {}),
     categories,
     tags: elements.tags.value.split(",").map((tag) => tag.trim()).filter(Boolean),
-    shortDescription: elements.shortDescription.value.trim(),
+    shortDescription: elements.shortDescription.value,
     fullDescription,
     ...(elements.contentHtml.value ? { contentHtml: elements.contentHtml.value } : {}),
     ...(fullDescription.length ? { contentText: fullDescription.join("\n\n") } : {}),

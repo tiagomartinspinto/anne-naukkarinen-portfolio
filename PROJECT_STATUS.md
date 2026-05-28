@@ -55,7 +55,33 @@ The Cargo stylesheet uses generic `sans-serif`; no proprietary font files were p
 - Forced public/read-only mode disables save, check, and publish buttons.
 - GitHub Pages branch deployment was enabled and verified live.
 
+## Rigorous QA Pass - May 28, 2026
+
+- Re-ran `npm run check`: passed with 21 projects, 21 published, 0 draft.
+- Re-ran `npm run preview` at `http://127.0.0.1:8080/` and `npm run admin` at `http://127.0.0.1:8787/`.
+- Compared all 21 migrated project routes against their original Cargo URLs in the browser. Normalized visible project text, image counts, and external link lists matched Cargo for every page.
+- Compared the homepage/index against Cargo. Project order matched exactly, with 21 thumbnails on both sites and matching desktop thumbnail box positions/crops.
+- Verified previous/next project buttons and the return-to-index button in the local preview.
+- Verified the About page text against Cargo as part of the page-by-page comparison.
+- Verified that the Jousikvartetto credit line `Documentation: Tiago Martins Pinto.` is present in the original Cargo portfolio text. It is an original documentation credit and was kept.
+- Checked public-facing Tiago references. The remaining references are original Cargo credits or documentation acknowledgements, not migration-added branding.
+- Checked the local editor: project/site/media tabs load, the `LOCAL EDITOR ONLY` banner appears, Save + Preview works, backups are created, and forced public/read-only mode disables save, check, and publish actions.
+- Fixed project-page image sizing on desktop so Cargo-width images render at their original 670px width instead of being constrained to the 560px text column. Mobile still constrains images to the viewport.
+- Fixed the editor save pipeline so a no-op Save/Preview preserves Cargo text spacing, empty metadata placeholders, `aboutHtml`, `navigationLabel`, and the existing quoted data-file style instead of creating noisy formatting/content churn.
+
+## Links Needing Anne's Review
+
+These links are preserved from Cargo, but currently fail or need a replacement check:
+
+- `https://fienta.com/fi/s/jousikvartetto` returns 404.
+- `https://www.riikkathitz.com/vesireitit` returns 404.
+- `https://www.ehka.net/xs-kyse-on-kaikesta-viisi-sooloa-ja-kirja/` returns 404.
+- `https://madhousehelsinki.fi/events/Kyse%20on%20kaikesta%20%E2%80%93%20viisi%20sooloa%20ja%20kirja` returns 404.
+- `https://www.nidekauppa.fi/` currently has a certificate/domain mismatch on the `www` host.
+- `http://khaospublishing.com/product/kyse-on-kaikesta/` returns 404.
+
 ## Next Recommended Checks
 
-- Review the migrated site with Anne for text/credit accuracy.
+- Review the migrated site with Anne for final text/credit accuracy and replacement URLs for the broken original external links above.
+- Anne should approve the responsive mobile adaptation, since the original Cargo mobile layout overflows horizontally while the GitHub Pages version is intentionally usable on narrow screens.
 - Run `npm run check`, local preview, and local admin before publishing future edits.
