@@ -1,5 +1,9 @@
 # Project Status
 
+## Current Status
+
+The GitHub repository is the working source for Anne Naukkarinen's portfolio. The public site is static, self-contained, Cargo-independent, and deployed from GitHub Pages. Future edits happen in the local editor or directly in this repository.
+
 ## Migrated
 
 - Initialized the repository from the local-only static/editor baseline.
@@ -69,16 +73,16 @@ The Cargo stylesheet uses generic `sans-serif`; no proprietary font files were p
 - Fixed project-page image sizing on desktop so Cargo-width images render at their original 670px width instead of being constrained to the 560px text column. Mobile still constrains images to the viewport.
 - Fixed the editor save pipeline so a no-op Save/Preview preserves Cargo text spacing, empty metadata placeholders, `aboutHtml`, `navigationLabel`, and the existing quoted data-file style instead of creating noisy formatting/content churn.
 
-## Links Needing Anne's Review
+## Broken External Links Handled
 
-These links are preserved from Cargo, but currently fail or need a replacement check:
+Known broken non-Cargo links were removed or replaced on May 28, 2026:
 
-- `https://fienta.com/fi/s/jousikvartetto` returns 404.
-- `https://www.riikkathitz.com/vesireitit` returns 404.
-- `https://www.ehka.net/xs-kyse-on-kaikesta-viisi-sooloa-ja-kirja/` returns 404.
-- `https://madhousehelsinki.fi/events/Kyse%20on%20kaikesta%20%E2%80%93%20viisi%20sooloa%20ja%20kirja` returns 404.
-- `https://www.nidekauppa.fi/` currently has a certificate/domain mismatch on the `www` host.
-- `http://khaospublishing.com/product/kyse-on-kaikesta/` returns 404.
+- Removed the dead Fienta ticket link from Jousikvartetto. The ticket text remains readable without a live link.
+- Replaced the old Vesireitit link with `https://www.riikkathitz.com/vesireitit-2026`.
+- Removed the dead Ehkä event link from Kyse on kaikesta while keeping the festival name in the text.
+- Replaced the old Mad House event link with the official archive URL: `https://archive.madhousehelsinki.fi/events/Kyse%20on%20kaikesta%20%E2%80%93%20viisi%20sooloa%20ja%20kirja?locale=fi`.
+- Removed the Nide URL because both `https://www.nidekauppa.fi/` and `https://nidekauppa.fi/` have a certificate/domain mismatch, while the HTTP host serves only a default placeholder.
+- Replaced the dead Khaos product URL with the current Khaos shop URL: `https://www.khaospublishing.com/shop/`.
 
 ## Cargo Independence Check
 
@@ -92,15 +96,32 @@ Date of check: May 28, 2026.
 - `npm install`: passed with 0 vulnerabilities.
 - `npm run check`: passed with 21 projects, 21 published, 0 draft.
 - Local public preview: passed at `http://127.0.0.1:8080/`; homepage, all 21 project routes, active navigation, previous/next/index controls, canonical metadata, social image metadata, and console errors were checked.
-- Local editor/backend: passed at `http://127.0.0.1:8787/`; project list, site data, Save + Preview, local asset dimension lookup, missing asset detection, validation API, Publish / Safety presence, and forced public/read-only safety mode were checked.
+- Local editor: passed at `http://127.0.0.1:8787/`; project list, site data, Save + Preview, local asset dimension lookup, missing asset detection, publish check, Publish tab presence, and forced public/read-only safety mode were checked.
 - GitHub Pages: public URL returned HTTP 200, and `tools/admin/` returned HTTP 404. `_config.yml` excludes `tools/`, `node_modules/`, `package-lock.json`, and backup data files.
 - Public save/publish API exposure: not present in preview/public routes; `POST /api/save` on the public preview returns 404.
 - Cargo deletion readiness: the GitHub Pages portfolio should continue to work after the Cargo account is deleted because no public runtime asset, page, script, CSS, thumbnail, image, social preview image, or editor validation path depends on Cargo.
 
-Anne should manually review the broken original external links listed above and give final approval for credits, collaborators, and the responsive mobile adaptation before deleting Cargo.
+Anne should give final approval for credits, collaborators, and the responsive mobile adaptation before deleting Cargo.
+
+## Steve Jobs Polish Pass
+
+Date of pass: May 28, 2026.
+
+- Simplified the normal editor language so the workflow reads as edit, preview, publish.
+- Renamed the editor's Media tab to Images and Publish / Safety to Publish while keeping all safety checks.
+- Moved exact project layout editing into an Advanced section on the Text tab with a quiet warning. Normal editing no longer requires touching layout HTML.
+- Added a minimal bad-project state for URLs such as `?project=bad-slug`: `Project not found.` plus `View all projects`.
+- Removed or replaced every known broken non-Cargo link listed in the QA notes; no known broken external links remain live from that list.
+- Hardened the local editor server path containment with `path.relative` checks.
+- Added a per-run local admin token for POST actions. The terminal prints the full local editor URL; save, restore, publish check, publish, and image-dimension POST actions require that token.
+- Added `.github/workflows/check.yml` so GitHub Actions runs `npm install` and `npm run check` on push and pull request.
+- Kept the public visual identity intact: no redesign, no new framework, no tracking, no public backend.
+- Tested `npm install`, `npm run check`, local preview, local editor, bad project slug, editor save/preview flow, publish check, public read-only safety, and GitHub Pages path behavior.
+
+Anne should still give final human approval for credits, collaborators, and any project text that references past events or ticketing.
 
 ## Next Recommended Checks
 
-- Review the migrated site with Anne for final text/credit accuracy and replacement URLs for the broken original external links above.
+- Review the site with Anne for final text and credit accuracy.
 - Anne should approve the responsive mobile adaptation, since the original Cargo mobile layout overflows horizontally while the GitHub Pages version is intentionally usable on narrow screens.
 - Run `npm run check`, local preview, and local admin before publishing future edits.

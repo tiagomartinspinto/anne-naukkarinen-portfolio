@@ -1,4 +1,5 @@
 const http = require("node:http");
+const crypto = require("node:crypto");
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const { promisify } = require("node:util");
@@ -13,6 +14,7 @@ const execFileAsync = promisify(execFile);
 const mode = process.argv[2] === "preview" ? "preview" : "admin";
 const host = "127.0.0.1";
 const port = Number(process.env.PORT || (mode === "preview" ? 8080 : 8787));
+const adminToken = mode === "admin" ? process.env.ADMIN_TOKEN || crypto.randomBytes(24).toString("base64url") : "";
 
 const repoRoot = path.resolve(__dirname, "..", "..");
 const adminRoot = path.join(repoRoot, "tools", "admin");
@@ -23,6 +25,7 @@ const siteBackupPath = path.join(repoRoot, "data", "site.backup.js");
 const assetsRoot = path.join(repoRoot, "assets");
 const publishPaths = [
   "index.html",
+  ".github/workflows/check.yml",
   "styles.css",
   "script.js",
   "_config.yml",
@@ -70,8 +73,34 @@ const sendJson = (response, statusCode, responseData) =>
   });
 
 const safeJoin = (root, requestPath) => {
-  const absolute = path.resolve(root, `.${requestPath}`);
-  return absolute.startsWith(root) ? absolute : null;
+  const rootPath = path.resolve(root);
+  const absolute = path.resolve(rootPath, `.${requestPath}`);
+  const relative = path.relative(rootPath, absolute);
+
+  if (relative.startsWith("..") || path.isAbsolute(relative)) {
+    return null;
+  }
+
+  return absolute;
+};
+
+const isContainedPath = (root, filePath) => {
+  const relative = path.relative(path.resolve(root), path.resolve(filePath));
+  return relative === "" || (!relative.startsWith("..") && !path.isAbsolute(relative));
+};
+
+const tokenFromRequest = (request, url) => request.headers["x-admin-token"] || url.searchParams.get("token") || "";
+
+const requireAdminToken = (request, response, url) => {
+  if (!adminToken || tokenFromRequest(request, url) === adminToken) {
+    return true;
+  }
+
+  sendJson(response, 403, {
+    ok: false,
+    message: "Open the editor from the local URL printed in the terminal."
+  });
+  return false;
 };
 
 const readJsonBody = async (request) => {
@@ -240,7 +269,7 @@ const handleSave = async (request, response) => {
 
   sendJson(response, 200, {
     ok: true,
-    message: "Saved locally to data/projects.js and data/site.js, with backups refreshed.",
+    message: "Saved locally. Backup refreshed.",
     gitStatus: await getScopedGitStatus(),
     backupExists: true
   });
@@ -384,26 +413,41 @@ const handleAdminRequest = async (request, response, url) => {
   }
 
   if (request.method === "POST" && url.pathname === "/api/image-dimensions") {
+    if (!requireAdminToken(request, response, url)) {
+      return;
+    }
     await handleImageDimensions(request, response);
     return;
   }
 
   if (request.method === "POST" && url.pathname === "/api/save") {
+    if (!requireAdminToken(request, response, url)) {
+      return;
+    }
     await handleSave(request, response);
     return;
   }
 
   if (request.method === "POST" && url.pathname === "/api/restore-backup") {
+    if (!requireAdminToken(request, response, url)) {
+      return;
+    }
     await handleRestoreBackup(request, response);
     return;
   }
 
   if (request.method === "POST" && url.pathname === "/api/check") {
+    if (!requireAdminToken(request, response, url)) {
+      return;
+    }
     await handleCheck(response);
     return;
   }
 
   if (request.method === "POST" && url.pathname === "/api/publish") {
+    if (!requireAdminToken(request, response, url)) {
+      return;
+    }
     await handlePublish(request, response);
     return;
   }
@@ -420,7 +464,7 @@ const handleAdminRequest = async (request, response, url) => {
 
   if (request.method === "GET" && url.pathname.startsWith("/assets/")) {
     const assetFilePath = safeJoin(repoRoot, url.pathname);
-    if (!assetFilePath || !assetFilePath.startsWith(assetsRoot)) {
+    if (!assetFilePath || !isContainedPath(assetsRoot, assetFilePath)) {
       send(response, 403, "Forbidden");
       return;
     }
@@ -492,5 +536,6 @@ const server = http.createServer(async (request, response) => {
 
 server.listen(port, host, () => {
   const label = mode === "admin" ? "Local portfolio admin" : "Portfolio preview";
-  console.log(`${label} running at http://${host}:${port}/`);
+  const tokenQuery = mode === "admin" ? `?token=${encodeURIComponent(adminToken)}` : "";
+  console.log(`${label} running at http://${host}:${port}/${tokenQuery}`);
 });

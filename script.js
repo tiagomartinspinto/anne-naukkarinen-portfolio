@@ -11,6 +11,8 @@ const elements = {
   project: document.querySelector("#project"),
   projectContent: document.querySelector("#project-content"),
   projectFooter: document.querySelector("#project-footer"),
+  notFound: document.querySelector("#not-found"),
+  notFoundIndex: document.querySelector("#not-found-index"),
   thumbnails: document.querySelector("#thumbnails"),
   previousProject: document.querySelector("#previous-project"),
   nextProject: document.querySelector("#next-project"),
@@ -153,6 +155,8 @@ const renderThumbnails = () => {
 const renderProject = (project) => {
   state.activeSlug = project.slug;
   elements.project.hidden = false;
+  elements.notFound.hidden = true;
+  elements.thumbnails.hidden = false;
   elements.projectContent.innerHTML = project.contentHtml || "";
   decorateProjectContent();
   elements.projectFooter.replaceChildren();
@@ -162,9 +166,22 @@ const renderProject = (project) => {
 const renderIndex = () => {
   state.activeSlug = null;
   elements.project.hidden = true;
+  elements.notFound.hidden = true;
+  elements.thumbnails.hidden = false;
   elements.projectContent.replaceChildren();
   elements.projectFooter.replaceChildren();
   updateDocumentMeta();
+};
+
+const renderNotFound = () => {
+  state.activeSlug = null;
+  elements.project.hidden = true;
+  elements.notFound.hidden = false;
+  elements.thumbnails.hidden = true;
+  elements.projectContent.replaceChildren();
+  elements.projectFooter.replaceChildren();
+  updateDocumentMeta();
+  document.title = `Project not found - ${SITE.title}`;
 };
 
 const render = ({ focus = false } = {}) => {
@@ -174,6 +191,8 @@ const render = ({ focus = false } = {}) => {
 
   if (activeProject) {
     renderProject(activeProject);
+  } else if (requestedSlug) {
+    renderNotFound();
   } else {
     renderIndex();
   }
@@ -220,6 +239,11 @@ const setupSiteShell = () => {
   });
   elements.showIndex.href = indexUrl();
   elements.showIndex.addEventListener("click", (event) => {
+    event.preventDefault();
+    navigateToIndex();
+  });
+  elements.notFoundIndex.href = indexUrl();
+  elements.notFoundIndex.addEventListener("click", (event) => {
     event.preventDefault();
     navigateToIndex();
   });

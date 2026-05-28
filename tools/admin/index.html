@@ -14,7 +14,7 @@
         <p class="admin-kicker">Local only</p>
         <h1>Anne Naukkarinen portfolio editor</h1>
         <p class="admin-subtitle">
-          Edits local project data, keeps a local backup, and publishes only through this computer's git setup.
+          Edit, preview, and publish from this computer.
         </p>
       </div>
     </header>
@@ -40,13 +40,13 @@
     <main class="admin-shell admin-page">
       <section id="runtime-banner" class="local-only-banner">
         <p class="runtime-banner__title">LOCAL EDITOR ONLY</p>
-        <p>Changes require local git access and repository write permissions.</p>
+        <p>Changes are saved only on this computer.</p>
         <p id="runtime-mode-message">Checking runtime...</p>
       </section>
 
       <section class="notice-box">
-        <p>This editor binds only to <code>127.0.0.1</code> and is excluded from GitHub Pages.</p>
-        <p>It does not use GitHub tokens, passwords, external APIs, cloud uploads, analytics, or remote image editing.</p>
+        <p>This editor is not part of the public website.</p>
+        <p>It does not use cloud uploads, analytics, or remote image editing.</p>
       </section>
 
       <div class="admin-layout">
@@ -81,10 +81,10 @@
           <nav class="tab-list" aria-label="Editor sections">
             <button type="button" class="tab-button is-active" data-tab-target="projects" aria-selected="true">Projects</button>
             <button type="button" class="tab-button" data-tab-target="site" aria-selected="false">Site</button>
-            <button type="button" class="tab-button" data-tab-target="content" aria-selected="false">Content</button>
-            <button type="button" class="tab-button" data-tab-target="media" aria-selected="false">Media</button>
+            <button type="button" class="tab-button" data-tab-target="content" aria-selected="false">Text</button>
+            <button type="button" class="tab-button" data-tab-target="media" aria-selected="false">Images</button>
             <button type="button" class="tab-button" data-tab-target="preview" aria-selected="false">Preview</button>
-            <button type="button" class="tab-button" data-tab-target="publish" aria-selected="false">Publish / Safety</button>
+            <button type="button" class="tab-button" data-tab-target="publish" aria-selected="false">Publish</button>
           </nav>
 
           <form id="project-form" class="tabbed-editor">
@@ -92,7 +92,7 @@
               <div class="panel">
                 <div class="panel-heading">
                   <h2>Project basics</h2>
-                  <p class="panel-meta">Identity, order, and thumbnail metadata</p>
+                  <p class="panel-meta">Title, order, and thumbnail</p>
                 </div>
                 <div class="field-grid">
                   <label class="field">
@@ -173,7 +173,7 @@
             <section id="tab-site" class="tab-panel" data-tab-panel="site" hidden>
               <div class="panel">
                 <div class="panel-heading">
-                  <h2>Site metadata</h2>
+                  <h2>Site details</h2>
                   <p class="panel-meta">Text only; layout stays in code</p>
                 </div>
                 <div class="field-grid">
@@ -272,7 +272,7 @@
             <section id="tab-content" class="tab-panel" data-tab-panel="content" hidden>
               <div class="panel">
                 <div class="panel-heading">
-                  <h2>Descriptions</h2>
+                  <h2>Project text</h2>
                 </div>
                 <label class="field">
                   <span class="field-label">Short description</span>
@@ -280,16 +280,20 @@
                 </label>
                 <div class="repeatable-section">
                   <div class="repeatable-heading">
-                    <span class="field-label">Full description paragraphs</span>
+                    <span class="field-label">Project text paragraphs</span>
                     <button id="add-paragraph-button" type="button">Add paragraph</button>
                   </div>
                   <div id="paragraph-list" class="repeatable-list"></div>
                 </div>
-                <label class="field">
-                  <span class="field-label">Preserved page HTML</span>
-                  <textarea id="contentHtml" class="text-area code-area" rows="12" spellcheck="false"></textarea>
-                  <span class="field-help">Used by the public site to preserve the migrated layout. Edit carefully.</span>
-                </label>
+                <details class="advanced-panel">
+                  <summary>Advanced</summary>
+                  <label class="field">
+                    <span class="field-label">Exact project layout</span>
+                    <textarea id="contentHtml" class="text-area code-area" rows="12" spellcheck="false"></textarea>
+                    <span class="field-help">Advanced: this controls the exact project layout. Edit only if you know what you are changing.</span>
+                  </label>
+                  <p class="field-help">This is trusted local portfolio content. Do not paste layout code from unknown sources.</p>
+                </details>
               </div>
 
               <div class="panel">
@@ -389,7 +393,7 @@
 
               <section class="panel">
                 <div class="panel-heading">
-                  <h2>Project media</h2>
+                  <h2>Project images and media</h2>
                   <div class="button-row">
                     <button id="add-image-button" type="button">Add image</button>
                     <button id="add-video-button" type="button">Add video</button>
@@ -406,10 +410,10 @@
             <div class="preview-layout">
               <section class="panel">
                 <div class="panel-heading">
-                  <h2>Current object preview</h2>
+                  <h2>Current project details</h2>
                   <div class="button-row">
-                    <button id="copy-current-button" type="button">Copy JSON</button>
-                    <button id="download-current-button" type="button">Download JSON</button>
+                    <button id="copy-current-button" type="button">Copy details</button>
+                    <button id="download-current-button" type="button">Download details</button>
                   </div>
                 </div>
                 <pre id="object-preview" class="preview-box"></pre>
@@ -418,7 +422,7 @@
               <section class="panel">
                 <div class="panel-heading">
                   <h2>Selected project preview</h2>
-                  <p class="panel-meta">Uses the first image and crop metadata</p>
+                  <p class="panel-meta">Uses the first image and thumbnail crop</p>
                 </div>
                 <article class="mini-project-card">
                   <div class="mini-project-card__image">
@@ -436,12 +440,12 @@
           <section id="tab-publish" class="tab-panel" data-tab-panel="publish" hidden>
             <div class="panel">
               <div class="panel-heading">
-                <h2>Publish and safety</h2>
+                <h2>Publish</h2>
               </div>
               <div class="safety-grid">
                 <div class="safety-note">
-                  <h3>Local boundaries</h3>
-                  <p>This admin stays on localhost, writes only project/site data plus backups, and never edits original image files.</p>
+                  <h3>Local only</h3>
+                  <p>This editor stays on this computer, saves portfolio text, and never edits original image files.</p>
                 </div>
                 <div class="safety-note">
                   <h3>Publish access</h3>
@@ -449,18 +453,18 @@
                 </div>
                 <div class="safety-note">
                   <h3>Backups</h3>
-                  <p>Save locally refreshes backups before rewriting <code>data/projects.js</code> and <code>data/site.js</code>.</p>
+                  <p>Save locally makes a backup before changing portfolio text.</p>
                 </div>
               </div>
               <div class="button-row safety-actions">
-                <button id="run-check-button" type="button">Run check</button>
+                <button id="run-check-button" type="button">Publish check</button>
                 <button id="restore-backup-button" type="button">Restore backup</button>
               </div>
             </div>
 
             <section class="panel">
               <div class="panel-heading">
-                <h2>Git output</h2>
+                <h2>Publish notes</h2>
                 <p class="panel-meta">Publish runs <code>npm run check</code>, then stages approved portfolio files only.</p>
               </div>
               <pre id="git-output" class="preview-box preview-box--git">Waiting for save or publish.</pre>
@@ -535,11 +539,11 @@
               </select>
             </label>
             <label class="field field-span-2">
-              <span class="field-label">Source</span>
+              <span class="field-label">File or URL</span>
               <input class="text-input" data-field="src" type="text">
             </label>
             <label class="field field-span-2">
-              <span class="field-label">Alt</span>
+              <span class="field-label">Alt text</span>
               <input class="text-input" data-field="alt" type="text">
             </label>
             <label class="field field-span-2">
@@ -567,9 +571,9 @@
 
           <div class="image-entry__action-groups">
             <div class="button-row">
-              <button type="button" data-image-action="browse">Use browser</button>
+              <button type="button" data-image-action="browse">Choose image</button>
               <button type="button" data-image-action="detect-dimensions">Detect dimensions</button>
-              <button type="button" data-image-action="copy-path">Copy source</button>
+              <button type="button" data-image-action="copy-path">Copy path</button>
               <button type="button" data-image-action="open-image">Open media</button>
             </div>
             <div class="button-row">

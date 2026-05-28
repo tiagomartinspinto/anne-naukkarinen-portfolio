@@ -12,7 +12,8 @@ const currentSearchParams = new URLSearchParams(window.location.search);
 const runtime = {
   forcePublicMode: currentSearchParams.get("admin-public") === "1",
   isLocalhost: LOCAL_HOSTS.has(window.location.hostname),
-  isGitHubPages: window.location.hostname.endsWith("github.io")
+  isGitHubPages: window.location.hostname.endsWith("github.io"),
+  adminToken: currentSearchParams.get("token") || ""
 };
 runtime.canUseLocalApi = !runtime.forcePublicMode && runtime.isLocalhost;
 
@@ -255,19 +256,19 @@ const reportActionError = (actionLabel, error) => {
   setGitOutput(errorDetails(error));
 };
 
-const publicDisabledMessage = () => "Publishing disabled on public site.";
+const publicDisabledMessage = () => "Open the local editor to save or publish.";
 
 const updateRuntimeUi = () => {
   document.documentElement.dataset.runtime = state.runtime.canUseLocalApi ? "local" : "public";
 
   if (state.runtime.canUseLocalApi) {
-    elements.runtimeModeMessage.textContent =
-      "Local mode active. Save and publish actions use this computer's local filesystem and git credentials.";
+    elements.runtimeModeMessage.textContent = state.runtime.adminToken
+      ? "Local mode active. Save and publish use this computer only."
+      : "Local mode active. To save or publish, open the full editor URL printed in the terminal.";
     return;
   }
 
-  elements.runtimeModeMessage.textContent =
-    "Publishing disabled on public site. Editing, previews, and project-data export are available; save, publish, and filesystem access are blocked.";
+  elements.runtimeModeMessage.textContent = "Public read-only mode. Open the local editor to save or publish.";
 };
 
 const assetUrlForSrc = (src) => {
@@ -305,10 +306,10 @@ const updateLocalActionButtons = () => {
   elements.savePreviewButton.disabled = disabled;
   elements.runCheckButton.disabled = disabled;
   elements.publishButton.disabled = disabled;
-  elements.saveButton.title = disabled ? "Save locally is disabled on public site." : "";
-  elements.savePreviewButton.title = disabled ? "Save + Preview is disabled on public site." : "";
-  elements.runCheckButton.title = disabled ? "Run check is disabled on public site." : "";
-  elements.publishButton.title = disabled ? "Publishing disabled on public site." : "";
+  elements.saveButton.title = disabled ? "Open the local editor to save." : "";
+  elements.savePreviewButton.title = disabled ? "Open the local editor to save and preview." : "";
+  elements.runCheckButton.title = disabled ? "Open the local editor to run the publish check." : "";
+  elements.publishButton.title = disabled ? "Open the local editor to publish." : "";
   elements.imageFolderSelect.disabled = disabled;
   updateBackupButtons();
 };
@@ -328,15 +329,18 @@ const parseJsonResponse = async (response) => {
 
 const apiRequest = async (path, options = {}) => {
   if (!state.runtime.canUseLocalApi) {
-    throw new Error("Local API and filesystem access are disabled outside localhost.");
+    throw new Error("Open the local editor to save or publish.");
   }
+
+  const requestHeaders = {
+    Accept: "application/json",
+    ...(state.runtime.adminToken ? { "X-Admin-Token": state.runtime.adminToken } : {}),
+    ...(options.headers || {})
+  };
 
   const response = await fetch(path, {
     ...options,
-    headers: {
-      Accept: "application/json",
-      ...(options.headers || {})
-    }
+    headers: requestHeaders
   });
 
   const responseData = await parseJsonResponse(response);
@@ -676,7 +680,7 @@ const moveImageRow = (row, delta) => {
 const setImageAsFirst = (row) => {
   elements.imageList.prepend(row);
   setActiveImageRow(row.dataset.rowId);
-  setStatus("Media item moved to the first position.");
+  setStatus("Item moved to the first position.");
   refreshPreview();
 };
 
@@ -708,7 +712,7 @@ const openImageFromRow = (row) => {
   const src = type === "image" ? normalizeAssetPath(rawSource) : rawSource;
 
   if (!src) {
-    setStatus("Add a media source first.");
+    setStatus("Add an image or media path first.");
     return;
   }
 
@@ -839,10 +843,10 @@ const createImageRow = (image = {}) => {
   row.querySelector("[data-image-action='copy-path']").addEventListener("click", () => {
     const src = row.querySelector("[data-field='src']").value.trim();
     if (!src) {
-      setStatus("Add a media source first.");
+      setStatus("Add an image or media path first.");
       return;
     }
-    copyText(src, "Media source copied.");
+    copyText(src, "Path copied.");
   });
 
   row.querySelector("[data-image-action='open-image']").addEventListener("click", () => {
@@ -1128,9 +1132,9 @@ const updateImageRowPreview = (row) => {
   const file = getImageLibraryFile(src);
   const thumbnailIsRemote = isRemoteUrl(thumbnail);
   const thumbnailFile = thumbnailIsRemote ? null : getImageLibraryFile(thumbnail);
-  const metadataWidth = widthInput.value.trim();
-  const metadataHeight = heightInput.value.trim();
-  const metadataText = metadataWidth && metadataHeight ? `${metadataWidth} x ${metadataHeight}` : "missing metadata";
+  const savedWidth = widthInput.value.trim();
+  const savedHeight = heightInput.value.trim();
+  const savedSizeText = savedWidth && savedHeight ? `${savedWidth} x ${savedHeight}` : "missing saved size";
   const fileText = file?.width && file?.height ? `${file.width} x ${file.height}` : "unknown file size";
 
   previewImage.style.objectPosition = thumbnailPosition;
@@ -1143,8 +1147,8 @@ const updateImageRowPreview = (row) => {
   if (!src) {
     previewImage.removeAttribute("src");
     cropPreviewImage.removeAttribute("src");
-    warning.textContent = [...warnings, "No media source selected"].join("\n");
-    meta.textContent = `Type: ${type}\nSource: -\nMetadata: ${metadataText}`;
+    warning.textContent = [...warnings, "No file or URL selected"].join("\n");
+    meta.textContent = `Type: ${type}\nSource: -\nSaved size: ${savedSizeText}`;
     openButton.disabled = true;
     return;
   }
@@ -1177,7 +1181,7 @@ const updateImageRowPreview = (row) => {
     previewImage.removeAttribute("src");
     cropPreviewImage.removeAttribute("src");
     warning.textContent = [...warnings, "Invalid path. Use assets/projects/..."].join("\n");
-    meta.textContent = `Type: image\nPath: ${src}\nMetadata: ${metadataText}`;
+    meta.textContent = `Type: image\nPath: ${src}\nSaved size: ${savedSizeText}`;
     openButton.disabled = true;
     return;
   }
@@ -1186,7 +1190,7 @@ const updateImageRowPreview = (row) => {
     previewImage.removeAttribute("src");
     cropPreviewImage.removeAttribute("src");
     warning.textContent = [...warnings, "Missing file. Check the path or add the image under assets/projects/[slug]/."].join("\n");
-    meta.textContent = `Type: image\nPath: ${src}\nMetadata: ${metadataText}`;
+    meta.textContent = `Type: image\nPath: ${src}\nSaved size: ${savedSizeText}`;
     openButton.disabled = true;
     return;
   }
@@ -1194,7 +1198,7 @@ const updateImageRowPreview = (row) => {
   previewImage.src = assetUrlForSrc(file.src);
   cropPreviewImage.src = assetUrlForSrc(file.src);
   warning.textContent = warnings.join("\n");
-  meta.textContent = `Type: image\nPath: ${src}\nMetadata: ${metadataText}\nFile: ${fileText}\nCrop: ${thumbnailPosition}, ${thumbnailZoom.toFixed(2)}x`;
+  meta.textContent = `Type: image\nPath: ${src}\nSaved size: ${savedSizeText}\nFile: ${fileText}\nCrop: ${thumbnailPosition}, ${thumbnailZoom.toFixed(2)}x`;
   openButton.disabled = false;
 };
 
@@ -1420,8 +1424,8 @@ const renderImageDiagnostics = () => {
     renderDiagnosticGroup("Unused images", diagnostics.unusedImages, "No unused files."),
     renderDiagnosticGroup("Invalid paths", diagnostics.invalidPaths, "All paths stay inside assets/projects/."),
     renderDiagnosticGroup("Missing alt text", diagnostics.missingAlt, "All images have alt text."),
-    renderDiagnosticGroup("Missing width", diagnostics.missingWidth, "All images have width metadata."),
-    renderDiagnosticGroup("Missing height", diagnostics.missingHeight, "All images have height metadata.")
+    renderDiagnosticGroup("Missing width", diagnostics.missingWidth, "All images have width."),
+    renderDiagnosticGroup("Missing height", diagnostics.missingHeight, "All images have height.")
   ];
 
   elements.imageDiagnostics.replaceChildren(...groups);
@@ -1697,11 +1701,11 @@ const resetForm = () => {
   }
 
   populateForm(state.projects[state.selectedIndex], state.selectedIndex);
-  setStatus("Form reset to the current working-list version.");
+  setStatus("Form reset to the saved project.");
 };
 
 const copyCurrentObject = () => {
-  copyText(currentProjectPreview(), "Current project object copied.");
+  copyText(currentProjectPreview(), "Current project details copied.");
 };
 
 const downloadCurrentObject = () => {
@@ -1904,7 +1908,7 @@ const loadProjects = async () => {
   setGitOutput(
     state.runtime.canUseLocalApi
       ? responseData.gitStatus?.join("\n") || "Working tree clean for approved portfolio files."
-      : `${publicDisabledMessage()}\n\nEditing, previews, and JSON export are available. Save, publish, backup restore, image scanning, and dimension detection are blocked.`
+        : `${publicDisabledMessage()}\n\nPreview and export are available. Save, publish, backup restore, image scanning, and dimension detection are blocked.`
   );
   updateBackupButtons();
   updateLocalActionButtons();
@@ -1956,7 +1960,7 @@ const saveLocally = async ({ skipConfirm = false, emptyConfirmationOverride = nu
 
   if (!skipConfirm) {
     const confirmed = window.confirm(
-      "Save locally?\n\nThis rewrites:\n- data/projects.js\n- data/site.js\n\nBefore saving, the editor refreshes local backups."
+      "Save changes on this computer?\n\nA backup will be made first."
     );
     if (!confirmed) {
       return false;
@@ -2035,20 +2039,20 @@ const saveAndPreview = async () => {
 };
 
 const runPortfolioCheck = async () => {
-  if (blockLocalApiAction("Run check")) {
+  if (blockLocalApiAction("Publish check")) {
     updateLocalActionButtons();
     return;
   }
 
   try {
     elements.runCheckButton.disabled = true;
-    setStatus("Running npm run check...");
-    setGitOutput("Running npm run check...");
+    setStatus("Running publish check...");
+    setGitOutput("Running publish check...");
     const responseData = await apiRequest("/api/check", { method: "POST" });
     setStatus(responseData.message || "Portfolio check passed.");
     setGitOutput(responseData.output);
   } catch (error) {
-    reportActionError("Run check", error);
+    reportActionError("Publish check", error);
   } finally {
     elements.runCheckButton.disabled = false;
     updateLocalActionButtons();
@@ -2183,7 +2187,7 @@ const bindEvents = () => {
 
     try {
       await loadProjects();
-      setStatus("Reloaded from data/projects.js.");
+      setStatus("Reloaded projects.");
     } catch (error) {
       setStatus(error.message);
     }
@@ -2300,7 +2304,7 @@ const init = async () => {
     await loadProjects();
     setStatus(
       state.runtime.canUseLocalApi
-        ? "Projects loaded from data/projects.js."
+        ? "Projects loaded."
         : "Projects loaded in public read-only mode. Publishing disabled on public site."
     );
   } catch (error) {

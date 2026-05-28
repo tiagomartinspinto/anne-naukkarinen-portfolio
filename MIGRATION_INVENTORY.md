@@ -96,9 +96,9 @@ Cargo URLs in this file are archival source references from the migration. They 
 - Thumbnail: assets/projects/jousikvartetto/thumb.jpg
 - Media count: 1
   - 1. image: assets/projects/jousikvartetto/01.jpg (670 x 471) alt: Jousikvartetto documentation image 1
-- External links: 2
-  - täältä: https://fienta.com/fi/s/jousikvartetto
-  - täällä: https://www.riikkathitz.com/vesireitit
+- External links in current live data: 1
+  - täällä: https://www.riikkathitz.com/vesireitit-2026
+  - Removed from live data: dead Fienta ticket link. Historical source URL: `https://fienta.com/fi/s/jousikvartetto`
 
 Text inventory:
 
@@ -614,13 +614,13 @@ _____
   - 13. image: assets/projects/kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019/13.jpg (670 x 418) alt: Kyse on kaikesta – Keskusteluja ajalta 3.9.2017-31.5.2019 documentation image 13
   - 14. image: assets/projects/kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019/14.jpg (670 x 418) alt: Kyse on kaikesta – Keskusteluja ajalta 3.9.2017-31.5.2019 documentation image 14
   - 15. image: assets/projects/kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019/15.jpg (670 x 502) alt: Kyse on kaikesta – Keskusteluja ajalta 3.9.2017-31.5.2019 documentation image 15
-- External links: 6
-  - XS – Uuden tanssin ja esitystaiteen festivaalilla: https://www.ehka.net/xs-kyse-on-kaikesta-viisi-sooloa-ja-kirja/
-  - Mad House Helsingissä: https://madhousehelsinki.fi/events/Kyse%20on%20kaikesta%20%E2%80%93%20viisi%20sooloa%20ja%20kirja
-  - https://www.nidekauppa.fi/: https://www.nidekauppa.fi/
+- External links in current live data: 4
+  - Mad House Helsingissä: https://archive.madhousehelsinki.fi/events/Kyse%20on%20kaikesta%20%E2%80%93%20viisi%20sooloa%20ja%20kirja?locale=fi
   - https://www.publics.fi/: https://www.publics.fi/
-  - Khaos-kirjakauppa: http://khaospublishing.com/product/kyse-on-kaikesta/
+  - Khaos-kirjakauppa: https://www.khaospublishing.com/shop/
   - Booky.fi: https://www.booky.fi/search.php?search=Kyse+on+kaikesta#!product_id=6003625
+  - Removed from live data: dead Ehkä event link. Historical source URL: `https://www.ehka.net/xs-kyse-on-kaikesta-viisi-sooloa-ja-kirja/`
+  - Removed from live data: broken Nide URL. Historical source URL: `https://www.nidekauppa.fi/`
 
 Text inventory:
 
@@ -1426,13 +1426,13 @@ This section confirms the runtime state after Cargo source URLs were removed fro
 
 | Project | Slug | Local asset folder | Local asset files | External non-Cargo links | Cargo source URL | Unresolved uncertainties |
 | --- | --- | --- | ---: | ---: | --- | --- |
-| Jousikvartetto | jousikvartetto | assets/projects/jousikvartetto/ | 2 | 2 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| Jousikvartetto | jousikvartetto | assets/projects/jousikvartetto/ | 2 | 1 | Historical only; not present in runtime data | See project notes above; Anne should review credits before final deletion. |
 | Notes on Wind | notes-on-wind | assets/projects/notes-on-wind/ | 1 | 1 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
 | A Book of Dances | a-book-of-dances | assets/projects/a-book-of-dances/ | 2 | 6 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
 | Carried by Invisible Bodies | carried-by-invisible-bodies | assets/projects/carried-by-invisible-bodies/ | 9 | 1 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
 | Notes 1.4.-9.8.2020 | notes-1-4-9-8-2020 | assets/projects/notes-1-4-9-8-2020/ | 26 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
 | how to ________ alone | how-to-alone | assets/projects/how-to-alone/ | 12 | 3 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
-| Kyse on kaikesta – Keskusteluja ajalta 3.9.2017-31.5.2019 | kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019 | assets/projects/kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019/ | 16 | 6 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
+| Kyse on kaikesta – Keskusteluja ajalta 3.9.2017-31.5.2019 | kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019 | assets/projects/kyse-on-kaikesta-keskusteluja-ajalta-3-9-2017-31-5-2019/ | 16 | 4 | Historical only; not present in runtime data | See project notes above; Anne should review credits before final deletion. |
 | I found a mouth and fell into it | i-found-a-mouth-and-fell-into-it | assets/projects/i-found-a-mouth-and-fell-into-it/ | 2 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
 | Mouthing | mouthing | assets/projects/mouthing/ | 14 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |
 | hear her ears here | hear-her-ears-here | assets/projects/hear-her-ears-here/ | 5 | 0 | Historical only; not present in runtime data | See project notes above; Anne should review credits/links before final deletion. |

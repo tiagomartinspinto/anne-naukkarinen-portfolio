@@ -19,6 +19,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html,
 body {
   margin: 0;
@@ -327,6 +331,26 @@ img {
   color: var(--page-link);
 }
 
+.not-found {
+  width: var(--content-width);
+  color: var(--page-link);
+}
+
+.not-found p {
+  margin: 0 0 8px;
+}
+
+.not-found a {
+  color: var(--project-link);
+  padding: 2px 3px;
+  text-decoration: none;
+}
+
+.not-found a:hover,
+.not-found a:focus-visible {
+  background: var(--highlight);
+}
+
 :focus {
   outline: 0;
 }
@@ -380,6 +404,7 @@ img {
   .project,
   .project-content,
   .project-footer,
+  .not-found,
   .thumbnails {
     width: 100%;
     max-width: 100%;

@@ -6,15 +6,17 @@ Run from the repository root:
 npm run admin
 ```
 
-The editor serves only on `127.0.0.1`. It writes local data files, refreshes backups before saving, and publishes only through the local git credentials on this computer.
+The editor serves only on `127.0.0.1`. It saves local files, refreshes backups before saving, and publishes only from an authenticated computer.
+
+When the editor starts, the terminal prints a local URL with a temporary token. Use that full URL to save, restore, check, or publish.
 
 Tabs:
 
-- Projects: identity, order, draft status, date, role, venue, collaborators, credits, thumbnail metadata.
-- Site: metadata, contact email, about text, public links.
-- Content: short/full descriptions, preserved migrated HTML, external links.
-- Media: local image browser, media rows for image/video/audio/embed, captions, credits, alt text, dimensions.
-- Preview: current project JSON and a compact card preview.
-- Publish / Safety: validation, git status, commit, and push.
+- Projects: title, order, draft status, date, role, venue, collaborators, credits, and thumbnail.
+- Site: contact email, about text, public links, and social preview text.
+- Text: project text, links, and advanced exact-layout editing.
+- Images: local image browser, image/video/audio/embed rows, captions, credits, alt text, and dimensions.
+- Preview: current project details and a compact card preview.
+- Publish: publish check, backups, commit, and push.
 
 Public GitHub Pages excludes `tools/`, so this editor is not deployed as a public admin panel.
